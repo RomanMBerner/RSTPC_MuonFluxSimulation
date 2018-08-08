@@ -1,5 +1,5 @@
 # RSTPC_MuonFluxSimulation
-Simulating the cosmic muon flux within the Resistive Shell TPC
+Simulating the cosmic muon flux within the Resistive Shell TPC.
 
 ROOT has to be installed: https://root.cern.ch/building-root
 
