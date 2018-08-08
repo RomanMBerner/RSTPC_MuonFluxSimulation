@@ -125,8 +125,8 @@ void muon_simulation(){
     cumulative->GetXaxis()->SetTitleOffset(1.5);
     cumulative->GetYaxis()->SetTitleOffset(1.7);
     cumulative->Draw();
-    c000->SaveAs("plots/cumulative_distribution_cos2(x)_large.root");
-    c000->SaveAs("plots/cumulative_distribution_cos2(x)_large.png");
+    c000->SaveAs("cumulative_distribution_cos2(x)_large.root");
+    c000->SaveAs("cumulative_distribution_cos2(x)_large.png");
 
 
     // Define histogram
@@ -246,8 +246,8 @@ void muon_simulation(){
     hist_projection_xz->GetXaxis()->SetTitle("x coord. [mm]");
     hist_projection_xz->GetYaxis()->SetTitle("z coord. [mm]");
     hist_projection_xz->Draw("colz");
-    c001->SaveAs("plots/xz_projection_of_active_volume.root");
-    c001->SaveAs("plots/xz_projection_of_active_volume.png");
+    c001->SaveAs("xz_projection_of_active_volume.root");
+    c001->SaveAs("xz_projection_of_active_volume.png");
 
     TCanvas *c002 = new TCanvas("c002","Canvas",1000,800);
     TH2D * hist_projection_yz = (TH2D*)hist_active_volume_voxels->Project3D("zy");
@@ -257,8 +257,8 @@ void muon_simulation(){
     hist_projection_yz->GetXaxis()->SetTitle("y coord. [mm]");
     hist_projection_yz->GetYaxis()->SetTitle("z coord. [mm]");
     hist_projection_yz->Draw("colz");
-    c002->SaveAs("plots/yz_projection_of_active_volume.root");
-    c002->SaveAs("plots/yz_projection_of_active_volume.png");
+    c002->SaveAs("yz_projection_of_active_volume.root");
+    c002->SaveAs("yz_projection_of_active_volume.png");
 
     TCanvas *c003 = new TCanvas("c003","Canvas",1000,800);
     TH2D * hist_projection_xy = (TH2D*)hist_active_volume_voxels->Project3D("yx");
@@ -268,8 +268,8 @@ void muon_simulation(){
     hist_projection_xy->GetXaxis()->SetTitle("x coord. [mm]");
     hist_projection_xy->GetYaxis()->SetTitle("y coord. [mm]");
     hist_projection_xy->Draw("colz");
-    c003->SaveAs("plots/xy_projection_of_active_volume.root");
-    c003->SaveAs("plots/xy_projection_of_active_volume.png");
+    c003->SaveAs("xy_projection_of_active_volume.root");
+    c003->SaveAs("xy_projection_of_active_volume.png");
 
     TCanvas *c004 = new TCanvas("c004","Canvas",1000,800);
     hist_xy_top_scint->SetStats(0);
@@ -279,8 +279,8 @@ void muon_simulation(){
     hist_xy_top_scint->GetXaxis()->SetTitleOffset(1.5);
     hist_xy_top_scint->GetYaxis()->SetTitleOffset(1.7);
 	hist_xy_top_scint->Draw("COLZ");
-    c004->SaveAs("plots/xy_top_scint.root");
-    c004->SaveAs("plots/xy_top_scint.png");
+    c004->SaveAs("xy_top_scint.root");
+    c004->SaveAs("xy_top_scint.png");
 
 	TCanvas *c005 = new TCanvas("c005","Canvas",1000,800);
     hist_theta->SetStats(0);
@@ -290,8 +290,8 @@ void muon_simulation(){
     hist_theta->GetXaxis()->SetTitleOffset(1.5);
     hist_theta->GetYaxis()->SetTitleOffset(1.7);
 	hist_theta->Draw();
-    c005->SaveAs("plots/hist_theta.root");
-    c005->SaveAs("plots/hist_theta.png");
+    c005->SaveAs("hist_theta.root");
+    c005->SaveAs("hist_theta.png");
 
     TCanvas *c006 = new TCanvas("c006","Canvas",1000,800);
     hist_phi->SetStats(0);
@@ -301,8 +301,8 @@ void muon_simulation(){
     hist_phi->GetXaxis()->SetTitleOffset(1.5);
     hist_phi->GetYaxis()->SetTitleOffset(1.7);
     hist_phi->Draw();
-    c006->SaveAs("plots/hist_phi.root");
-    c006->SaveAs("plots/hist_phi.png");
+    c006->SaveAs("hist_phi.root");
+    c006->SaveAs("hist_phi.png");
 
     TCanvas *c007 = new TCanvas("c007","Canvas",1000,800);
     hist_xy_in_bottom_scint->SetStats(0);
@@ -312,8 +312,8 @@ void muon_simulation(){
     hist_xy_in_bottom_scint->GetXaxis()->SetTitleOffset(1.5);
     hist_xy_in_bottom_scint->GetYaxis()->SetTitleOffset(1.7);
 	hist_xy_in_bottom_scint->Draw("COLZ");
-    c007->SaveAs("plots/xy_in_bottom_scint.root");
-    c007->SaveAs("plots/xy_in_bottom_scint.png");
+    c007->SaveAs("xy_in_bottom_scint.root");
+    c007->SaveAs("xy_in_bottom_scint.png");
 
     TCanvas *c008 = new TCanvas("c008","Canvas",1000,800);
     hist_xy_not_in_bottom_scint->SetStats(0);
@@ -323,8 +323,8 @@ void muon_simulation(){
     hist_xy_not_in_bottom_scint->GetXaxis()->SetTitleOffset(1.5);
     hist_xy_not_in_bottom_scint->GetYaxis()->SetTitleOffset(1.7);
 	hist_xy_not_in_bottom_scint->Draw("COLZ");
-    c008->SaveAs("plots/xy_not_in_bottom_scint.root");
-    c008->SaveAs("plots/xy_not_in_bottom_scint.png");
+    c008->SaveAs("xy_not_in_bottom_scint.root");
+    c008->SaveAs("xy_not_in_bottom_scint.png");
 
 } // end void muon_simulation()
 
