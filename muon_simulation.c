@@ -1,7 +1,7 @@
 // =================================================================== //
 //                                                                     //
-// Author: Roman Berner, roman.berner@lhep.unibe.ch                    //
-// Last edited: 08.08.2018                                             //
+// Author: R. Berner                                                   //
+// Last edited: 10.08.2018                                             //
 //                                                                     //
 // This script simulates the cosmic muon flux through the              //
 // Resistive Stell TPC, triggered by two (top and bottom)              //
@@ -59,7 +59,7 @@ void muon_simulation(){
 
     // Define simulation parameters
     // ==================================================
-    unsigned n_tracks                   = 20; //500000;       // number of muon tracks to simulate (~1 min for 60000 events)
+    unsigned n_tracks                   = 100000;       // number of muon tracks to simulate (~1 min for 60000 events)
 
 
     // Define dimensions and positions of the setup (in mm)
@@ -96,12 +96,24 @@ void muon_simulation(){
 
     // Define PDE (photon detection efficiencies) of the scintillators // ONLY ADJUST THE VALUES HERE
     // ==================================================
-    int n_eff_bins_top_scint_x      = 2;
-    int n_eff_bins_top_scint_y      = 2;
-    int n_eff_bins_bottom_scint_x = 2;
-    int n_eff_bins_bottom_scint_y = 2;
-    double efficiencies_top_scint[2][2]     = { {1.0, 1.0}, {1.0, 1.0} }; // { {(x1,y1),(x1,y2)}, {(x2,y1),(x2,y2)} }
-    double efficiencies_bottom_scint[2][2]  = { {1.0, 1.0}, {1.0, 1.0} };
+    int n_eff_bins_top_scint_x      = 7;
+    int n_eff_bins_top_scint_y      = 7;
+    int n_eff_bins_bottom_scint_x   = 7;
+    int n_eff_bins_bottom_scint_y   = 7;
+    double efficiencies_top_scint[7][7]     = { {1.00, 0.98, 0.96, 0.94, 0.92, 0.90, 0.88},
+                                                {0.86, 0.84, 0.82, 0.80, 0.78, 0.76, 0.74},
+                                                {0.72, 0.70, 0.68, 0.66, 0.64, 0.62, 0.60},
+                                                {0.58, 0.56, 0.54, 0.52, 0.50, 0.48, 0.46},
+                                                {0.44, 0.42, 0.40, 0.38, 0.36, 0.34, 0.32},
+                                                {0.30, 0.28, 0.26, 0.24, 0.22, 0.20, 0.18},
+                                                {0.16, 0.14, 0.12, 0.10, 0.08, 0.06, 0.04} };
+    double efficiencies_bottom_scint[7][7]  = { {1.00, 0.98, 0.96, 0.94, 0.92, 0.90, 0.88},
+                                                {0.86, 0.84, 0.82, 0.80, 0.78, 0.76, 0.74},
+                                                {0.72, 0.70, 0.68, 0.66, 0.64, 0.62, 0.60},
+                                                {0.58, 0.56, 0.54, 0.52, 0.50, 0.48, 0.46},
+                                                {0.44, 0.42, 0.40, 0.38, 0.36, 0.34, 0.32},
+                                                {0.30, 0.28, 0.26, 0.24, 0.22, 0.20, 0.18},
+                                                {0.16, 0.14, 0.12, 0.10, 0.08, 0.06, 0.04} };
 
 
     // Set random number generator seed
@@ -150,9 +162,13 @@ void muon_simulation(){
 
     // Make simulation
     // ==================================================
-    int counter = 0;
     // Loop over all tracks
     for(int track=0; track<n_tracks; track++) {
+
+        if(track%200==0) {
+            std::cout << " Processing track " << track << " of " << n_tracks << std::endl;
+        }
+
         // Get the (x,y) start position on the top scintillator
         std::vector<double> track_start(3,0);
         track_start[0] = ((double) rand() / (RAND_MAX)) * top_scint_length;
@@ -169,7 +185,7 @@ void muon_simulation(){
         // NOTE: THIS COULD BE MADE FASTER IF CREATING A VECTOR WITH ALL BIN CONTENTS:
         // CREATE A RANDOM NUMBER IN INTERVAL [0,NBINS] AND DO: RANDOM-ANGLE = VECTOR[NBINS*RANDOMNUMBER]
         double rand_0 = ((double) rand() / (RAND_MAX));
-        double theta = -99.9;
+        double theta  = -99.9;
         for(int bin=0; bin<n_steps ; bin++) {
             if( (cumulative->GetBinContent(bin+1)<rand_0) && (cumulative->GetBinContent(bin+2)>rand_0)) { theta = bin/1e7*180-90; }
         }
@@ -184,10 +200,6 @@ void muon_simulation(){
         hist_theta        ->Fill(theta);
         hist_phi          ->Fill(phi);
 
-        if(track==(counter+1)*n_tracks/1000) {
-            std::cout << (double)(counter+1)*100/1000 << "% of all events processed" << std::endl;
-            counter = counter + 1;
-        }
 
         // Propagate a straight track from the start point on top of the scintillator
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
